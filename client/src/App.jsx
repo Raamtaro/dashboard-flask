@@ -3,6 +3,7 @@ import './App.css'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Home from './Home'
+import Documents from './Documents'
 
 function App() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
@@ -15,7 +16,7 @@ function App() {
     <div className='grid-container'>
       <Header OpenSidebar={OpenSidebar}/>
       <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
-      <Home />
+      <Documents />
     </div>
   )
 }

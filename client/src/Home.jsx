@@ -60,7 +60,7 @@ function Home() {
     },
   ];
 
-    const data = [
+  const data = [
         {
           name: 'Page A',
           uv: 4000,
