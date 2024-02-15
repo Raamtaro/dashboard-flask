@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Table } from 'antd';
+import React, { useState,useEffect } from 'react';
+import { Table, Spin } from 'antd';
 
 function Documents() {
     const [table1Data, setTable1Data] = useState([]);
@@ -12,7 +12,33 @@ function Documents() {
     const [table1Columns, setTable1Columns] = useState([]);
     const [table2Columns, setTable2Columns] = useState([]);
 
-    // Example columns for table1 and table2, adjust based on your actual data structure
+  
+
+    useEffect(() => {
+      const defaultSetup = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch('https://app.improvize.com/loan', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({question:"project Sanchez"})
+
+          });
+          const jsonResponse = await response.json();
+          console.log(jsonResponse)
+        } catch(error) {
+          console.error('failed to fetch data:', error);
+        } finally {
+          setLoading(false)
+        }
+      }
+      defaultSetup()
+    }, []);
+
+    
 
     const commandConfig = {
       files: {
@@ -21,23 +47,23 @@ function Documents() {
           const parsedTable1 = JSON.parse(table1Json);
           const { filename, filetype } = parsedTable1;
         
-          // Transform into an array of objects for the table
+          
           const transformedData = Object.keys(filename).map(index => ({
-            key: index, // React keys for rendering lists
+            key: index, 
             filename: filename[index],
             category: filetype[index],
           }));
     
           return transformedData;
 
-        }, // You need to define this function
+        }, 
         parser2: (table2Json) => {
           const parsedTable2 = JSON.parse(table2Json);
           const { filetype, count } = parsedTable2;
         
-          // Transform into an array of objects for the table
+          
           const transformedData = Object.keys(filetype).map(index => ({
-            key: index, // React keys for rendering lists
+            key: index, 
             filetype: filetype[index],
             count: count[index],
           }));
@@ -75,15 +101,15 @@ function Documents() {
           const parsedTable1 = JSON.parse(table1Json);
           const { name, date } = parsedTable1;
         
-          // Transform into an array of objects for the table
+          
           const transformedData = Object.keys(name).map(index => ({
-            key: index, // React keys for rendering lists
+            key: index, 
             name: name[index],
             date: date ? date[index] : '',
           }));
     
           return transformedData;
-        }, // You need to define this function
+        }, 
         parser2: (table2Json) => {},
         columns1: [
           {
@@ -132,8 +158,9 @@ function Documents() {
         }
     
         // Check and parse table2 if it exists and is not an empty object
-        if (jsonResponse.table2 && Object.keys(jsonResponse.table2).length > 0) {
+        if (jsonResponse.table2 && Object.keys(jsonResponse.table2).length > 0 && !(jsonResponse.table2 === '{}')) {
           // const transformedTable2Data = parseAndTransformTable2(jsonResponse.table2);
+          console.log('I am being run')
           const transformedTable2Data = config.parser2(jsonResponse.table2);
           setTable2Columns(config.columns2);
           setTable2Data(transformedTable2Data);
@@ -170,15 +197,20 @@ function Documents() {
                     </div>  
                 </div> */}
             </div>
+            {loading && (
+                <div className="loading-container">
+                  <Spin size="large" />
+                </div>
+              )}
             {showTable1 && (
                 <div>
-                  <h2>Table 1</h2>
+                  <h2>Answer</h2>
                   <Table columns={table1Columns} dataSource={table1Data} loading={loading} rowKey="key" />
                 </div>
               )}
               {showTable2 && (
                 <div>
-                  <h2>Table 2</h2>
+                  <h2>Supporting Information</h2>
                   <Table columns={table2Columns} dataSource={table2Data} loading={loading} rowKey="key" />
                 </div>
             )}

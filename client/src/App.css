@@ -37,7 +37,12 @@ body {
   height: 100vh;
 }
 
-
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Or the height of the container where you want the spinner to appear */
+}
 
 /* Header  */
 .header {
@@ -194,6 +199,8 @@ body {
   margin-top: 60px;
   height: 300px;
 }
+
+
 
 /* End Main  */
 
