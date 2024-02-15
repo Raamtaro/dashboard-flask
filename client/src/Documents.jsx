@@ -5,69 +5,110 @@ function Documents() {
     const [table1Data, setTable1Data] = useState([]);
     const [table2Data, setTable2Data] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [showTables, setShowTables] = useState(false);
+    
     const [showTable1, setShowTable1] = useState(false);
     const [showTable2, setShowTable2] = useState(false);
 
+    const [table1Columns, setTable1Columns] = useState([]);
+    const [table2Columns, setTable2Columns] = useState([]);
+
     // Example columns for table1 and table2, adjust based on your actual data structure
-    const table1Columns = [
-      {
-          title: 'Filename',
-          dataIndex: 'filename',
-          key: 'filename',
-      },
-      {
-          title: 'Category',
-          dataIndex: 'category',
-          key: 'category',
-      },
-  ];
 
-    const table2Columns = [
-      {
-          title: 'Filetype',
-          dataIndex: 'filetype',
-          key: 'filetype',
-      },
-      {
-          title: 'Count',
-          dataIndex: 'count',
-          key: 'count',
-      },
-  ];
+    const commandConfig = {
+      files: {
+        parser1: (table1Json) => {
 
-    const parseAndTransformTable1 = (table1Json) => {
-      const parsedTable1 = JSON.parse(table1Json);
-      const { filename, filetype } = parsedTable1;
+          const parsedTable1 = JSON.parse(table1Json);
+          const { filename, filetype } = parsedTable1;
+        
+          // Transform into an array of objects for the table
+          const transformedData = Object.keys(filename).map(index => ({
+            key: index, // React keys for rendering lists
+            filename: filename[index],
+            category: filetype[index],
+          }));
     
-      // Transform into an array of objects for the table
-      const transformedData = Object.keys(filename).map(index => ({
-        key: index, // React keys for rendering lists
-        filename: filename[index],
-        category: filetype[index],
-      }));
+          return transformedData;
+
+        }, // You need to define this function
+        parser2: (table2Json) => {
+          const parsedTable2 = JSON.parse(table2Json);
+          const { filetype, count } = parsedTable2;
+        
+          // Transform into an array of objects for the table
+          const transformedData = Object.keys(filetype).map(index => ({
+            key: index, // React keys for rendering lists
+            filetype: filetype[index],
+            count: count[index],
+          }));
+
+          return transformedData;
+        },
+        columns1: [
+          {
+            title: 'Filename',
+            dataIndex: 'filename',
+            key: 'filename',
+          },
+          {
+            title: 'Category',
+            dataIndex: 'category',
+            key: 'category',
+          },          
+        ],
+        columns2: [
+          {
+              title: 'Filetype',
+              dataIndex: 'filetype',
+              key: 'filetype',
+          },
+          {
+              title: 'Count',
+              dataIndex: 'count',
+              key: 'count',
+          },
+        ],
+      },
+
+      data: {
+        parser1: (table1Json) => {
+          const parsedTable1 = JSON.parse(table1Json);
+          const { name, date } = parsedTable1;
+        
+          // Transform into an array of objects for the table
+          const transformedData = Object.keys(name).map(index => ({
+            key: index, // React keys for rendering lists
+            name: name[index],
+            date: date ? date[index] : '',
+          }));
     
-      return transformedData;
+          return transformedData;
+        }, // You need to define this function
+        parser2: (table2Json) => {},
+        columns1: [
+          {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name'
+          },
+          {
+            title: 'Date',
+            dataIndex: 'date',
+            key: 'date'
+          },
+          
+        ],
+        columns2: []
+      },
     };
 
-    const parseAndTransformTable2 = (table2Json) => {
-      const parsedTable2 = JSON.parse(table2Json);
-      const { filetype, count } = parsedTable2;
-    
-      // Transform into an array of objects for the table
-      const transformedData = Object.keys(filetype).map(index => ({
-        key: index, // React keys for rendering lists
-        filetype: filetype[index],
-        count: count[index],
-      }));
-    
-      return transformedData;
-    };
 
     const requestData = async (command) => {
       setLoading(true);
       setShowTable1(false);
       setShowTable2(false);
+      setTable1Columns([]);
+      setTable2Columns([]);
       try {
         const response = await fetch('https://app.improvize.com/loan', {
           method: "POST",
@@ -75,21 +116,26 @@ function Documents() {
             "Content-Type": "application/json",
             "Accept": "application/json"
           },
-          body: JSON.stringify({ question: command, name: "Sanchez" })
+          body: JSON.stringify({ question: command})
         });
     
         const jsonResponse = await response.json();
+        const config = commandConfig[command];
         console.log(jsonResponse)
         // Check and parse table1 if it exists and is not an empty object
         if (jsonResponse.table1 && Object.keys(jsonResponse.table1).length > 0) {
-          const transformedTable1Data = parseAndTransformTable1(jsonResponse.table1);
+          // const transformedTable1Data = parseAndTransformTable1(jsonResponse.table1);
+          const transformedTable1Data = config.parser1(jsonResponse.table1);
+          setTable1Columns(config.columns1);
           setTable1Data(transformedTable1Data);
           setShowTable1(true); // Control the rendering of table1
         }
     
         // Check and parse table2 if it exists and is not an empty object
         if (jsonResponse.table2 && Object.keys(jsonResponse.table2).length > 0) {
-          const transformedTable2Data = parseAndTransformTable2(jsonResponse.table2);
+          // const transformedTable2Data = parseAndTransformTable2(jsonResponse.table2);
+          const transformedTable2Data = config.parser2(jsonResponse.table2);
+          setTable2Columns(config.columns2);
           setTable2Data(transformedTable2Data);
           setShowTable2(true); // Control the rendering of table2
         }
@@ -118,11 +164,11 @@ function Documents() {
                         <h3>DATA</h3>
                     </div>  
                 </div>
-                <div className='card' onClick={() => requestData("project")}>
+                {/* <div className='card' onClick={() => requestData("project")}>
                     <div className='card-inner'>
                         <h3>PROJECT</h3>
                     </div>  
-                </div>
+                </div> */}
             </div>
             {showTable1 && (
                 <div>
