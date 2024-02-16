@@ -13,6 +13,8 @@ function Documents() {
     const [table1Columns, setTable1Columns] = useState([]);
     const [table2Columns, setTable2Columns] = useState([]);
 
+    const [answerHeader, setAnswerHeader] = useState();
+
     useEffect(() => {
       const defaultSetup = async () => {
         setLoading(true);
@@ -27,7 +29,7 @@ function Documents() {
 
           });
           const jsonResponse = await response.json();
-          console.log(jsonResponse)
+          // console.log(jsonResponse)
         } catch(error) {
           console.error('failed to fetch data:', error);
         } finally {
@@ -38,7 +40,6 @@ function Documents() {
     }, []);
 
     
-
     const commandConfig = {
       files: {
         parser1: (table1Json) => {
@@ -146,7 +147,7 @@ function Documents() {
     
         const jsonResponse = await response.json();
         const config = commandConfig[command];
-        console.log(jsonResponse)
+        setAnswerHeader(jsonResponse.answer)
         // Check and parse table1 if it exists and is not an empty object
         if (jsonResponse.table1 && Object.keys(jsonResponse.table1).length > 0) {
           // const transformedTable1Data = parseAndTransformTable1(jsonResponse.table1);
@@ -179,7 +180,10 @@ function Documents() {
                 <h3>DOCUMENTS</h3>
             </div>
 
+
+            
             <div className='main-cards'>
+                <Dropdown></Dropdown>
                 <div className='card' onClick={() => requestData("files")}>
                     <div className='card-inner'>
                         <h3>FILES</h3>
@@ -190,7 +194,7 @@ function Documents() {
                         <h3>DATA</h3>
                     </div>  
                 </div>
-                <Dropdown></Dropdown>
+                
             </div>
             {loading && (
                 <div className="loading-container">
@@ -199,7 +203,7 @@ function Documents() {
               )}
             {showTable1 && (
                 <div>
-                  <h2>Answer</h2>
+                  <h2>{answerHeader}</h2>
                   <Table columns={table1Columns} dataSource={table1Data} loading={loading} rowKey="key" />
                 </div>
               )}

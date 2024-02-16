@@ -208,6 +208,8 @@ body {
 .loading-container {
   height: 100%;
   width: 100%;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* End Main  */

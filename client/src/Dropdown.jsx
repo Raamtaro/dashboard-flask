@@ -26,7 +26,7 @@ function Dropdown() {
 
         const projectNamesArray = Object.values(projectNamesObj);
 
-        console.log(projectNamesArray);
+        // console.log(projectNamesArray);
 
         setProjectNames(projectNamesArray);
       } catch(error) {
@@ -68,7 +68,7 @@ function Dropdown() {
           {!loading && (            
             <div className='card-inner'>
                 <h3>{currentName ? currentName: "Please Select a Name"}</h3>
-                <Select onChange={handleSelectChange} loading={loading} className='project-menu'>
+                <Select placeholder="Project.." onChange={handleSelectChange} loading={loading} className='project-menu'>
                  {projectNames.map(name => (
                     <Select.Option key={name} value={name}>{name}</Select.Option>
                   ))}
@@ -78,13 +78,6 @@ function Dropdown() {
 
 
         </div>
-    
-      
-        // <Select onChange={handleSelectChange} loading={loading} className='project-menu'>
-        //   {projectNames.map(name => (
-        //     <Select.Option key={name} value={name}>{name}</Select.Option>
-        //   ))}
-        // </Select>
       
          
   )
