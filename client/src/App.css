@@ -200,7 +200,15 @@ body {
   height: 300px;
 }
 
+.project-menu {
+  width: 120px;
+  border: none;
+}
 
+.loading-container {
+  height: 100%;
+  width: 100%;
+}
 
 /* End Main  */
 

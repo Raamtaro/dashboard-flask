@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Table, Spin } from 'antd';
+import Dropdown from './Dropdown';
 
 function Documents() {
     const [table1Data, setTable1Data] = useState([]);
@@ -11,8 +12,6 @@ function Documents() {
 
     const [table1Columns, setTable1Columns] = useState([]);
     const [table2Columns, setTable2Columns] = useState([]);
-
-  
 
     useEffect(() => {
       const defaultSetup = async () => {
@@ -191,11 +190,7 @@ function Documents() {
                         <h3>DATA</h3>
                     </div>  
                 </div>
-                {/* <div className='card' onClick={() => requestData("project")}>
-                    <div className='card-inner'>
-                        <h3>PROJECT</h3>
-                    </div>  
-                </div> */}
+                <Dropdown></Dropdown>
             </div>
             {loading && (
                 <div className="loading-container">
