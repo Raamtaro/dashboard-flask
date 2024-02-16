@@ -5,7 +5,7 @@ import
  from 'react-icons/bs'
  import Home from './Home'
 
-function Sidebar({openSidebarToggle, OpenSidebar}) {
+function Sidebar({openSidebarToggle, OpenSidebar, switchTab}) {
   return (
             <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive": ""}>
                 <div className='sidebar-title'>
@@ -15,12 +15,12 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     <span className='icon close_icon' onClick={OpenSidebar}>X</span>
                 </div>
                 <ul className='sidebar-list'>
-                    <li className='sidebar-list-item'>
+                    <li className='sidebar-list-item' onClick={() => switchTab('home')}>
                         <a href="">
                             <BsGrid1X2Fill className='icon'/> Dashboard
                         </a>
                     </li>
-                    <li className='sidebar-list-item'>
+                    <li className='sidebar-list-item' onClick={() => switchTab('documents')}>
                         <a href="">
                             <BsFillArchiveFill className='icon'/> Documents
                         </a>

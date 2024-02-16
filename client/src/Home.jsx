@@ -25,22 +25,22 @@ function Home() {
   const [antData, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('/antdata'); // Adjust the endpoint as needed
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await fetch('/antdata'); // Adjust the endpoint as needed
+  //       const jsonData = await response.json();
+  //       setData(jsonData);
+  //     } catch (error) {
+  //       console.error('Failed to fetch data:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const columns = [
     {
@@ -187,9 +187,9 @@ function Home() {
                 <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
                 </LineChart>
             </ResponsiveContainer>
-            <ResponsiveContainer>
+            {/* <ResponsiveContainer>
           <Table columns={columns} dataSource={antData} loading={loading} rowKey="id" />
-        </ResponsiveContainer>    
+        </ResponsiveContainer>     */}
             
 
         </div>
