@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Table, Spin } from 'antd';
 import Dropdown from './Dropdown';
+import { ResponsiveContainer } from 'recharts';
 
 function Documents() {
     const [table1Data, setTable1Data] = useState([]);
@@ -160,7 +161,7 @@ function Documents() {
         // Check and parse table2 if it exists and is not an empty object
         if (jsonResponse.table2 && Object.keys(jsonResponse.table2).length > 0 && !(jsonResponse.table2 === '{}')) {
           // const transformedTable2Data = parseAndTransformTable2(jsonResponse.table2);
-          console.log('I am being run')
+          // console.log('I am being run')
           const transformedTable2Data = config.parser2(jsonResponse.table2);
           setTable2Columns(config.columns2);
           setTable2Data(transformedTable2Data);
@@ -202,16 +203,20 @@ function Documents() {
                 </div>
               )}
             {showTable1 && (
-                <div>
-                  <h2>{answerHeader}</h2>
-                  <Table columns={table1Columns} dataSource={table1Data} loading={loading} rowKey="key" />
-                </div>
+                
+                  <div>
+                    <h2>{answerHeader}</h2>
+                    <Table columns={table1Columns} dataSource={table1Data} loading={loading} rowKey="key" />
+                  </div>
+                
               )}
               {showTable2 && (
-                <div>
-                  <h2>Supporting Information</h2>
-                  <Table columns={table2Columns} dataSource={table2Data} loading={loading} rowKey="key" />
-                </div>
+                
+                  <div>
+                    <h2>Supporting Information</h2>
+                    <Table columns={table2Columns} dataSource={table2Data} loading={loading} rowKey="key" />
+                  </div>
+                
             )}
         </main>
     );
