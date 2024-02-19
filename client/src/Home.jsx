@@ -9,39 +9,6 @@ import
  
 
 function Home() {
-
-  // const [antData, setData] = useState([{}])
-  // useEffect(() => {
-  //   fetch("/antdata").then(
-  //     res => res.json()
-  //   ).then(
-  //     antData => {
-  //       setData(antData)
-  //       console.log(antData)
-  //       console.log(typeof antData.members)
-  //     }
-  //   )
-  // }, [])
-  const [antData, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await fetch('/antdata'); // Adjust the endpoint as needed
-  //       const jsonData = await response.json();
-  //       setData(jsonData);
-  //     } catch (error) {
-  //       console.error('Failed to fetch data:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   const columns = [
     {
       title: 'Name',

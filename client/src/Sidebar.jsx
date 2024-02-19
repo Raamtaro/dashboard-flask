@@ -16,14 +16,14 @@ function Sidebar({openSidebarToggle, OpenSidebar, switchTab}) {
                 </div>
                 <ul className='sidebar-list'>
                     <li className='sidebar-list-item' onClick={() => switchTab('home')}>
-                        <a href="">
+                        
                             <BsGrid1X2Fill className='icon'/> Dashboard
-                        </a>
+                        
                     </li>
                     <li className='sidebar-list-item' onClick={() => switchTab('documents')}>
-                        <a href="">
+                        
                             <BsFillArchiveFill className='icon'/> Documents
-                        </a>
+                        
                     </li>
                     <li className='sidebar-list-item'>
                         <a href="">
