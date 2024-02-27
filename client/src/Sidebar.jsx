@@ -3,7 +3,7 @@ import
 {BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
   BsListCheck, BsMenuButtonWideFill, BsFillGearFill, BsBank}
  from 'react-icons/bs'
- import Home from './Home'
+ import Home from './Tabs/Home'
 
 function Sidebar({openSidebarToggle, OpenSidebar, switchTab}) {
   return (
