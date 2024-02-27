@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import { Table, Spin } from 'antd';
-import Dropdown from '../Dropdown';
+import Dropdown from '../../Dropdown';
 import { ResponsiveContainer } from 'recharts';
 
 function Documents() {
