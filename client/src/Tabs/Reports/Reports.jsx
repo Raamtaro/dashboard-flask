@@ -42,6 +42,14 @@ function Reports() {
         { name: 'Loans', value: 7566 },
         // More data...
     ];
+    const pieApplicantData = [
+        { name: 'Eligible', value: 2400 },
+        { name: 'Rejected', value: 4567 },
+        { name: 'Pending', value: 5672 },
+        { name: 'Irregular', value: 7566 },
+        // More data...
+    ];
+
     const progressData = [
         { label: 'Loan Applications Complete', value: 70 },
         { label: 'All Loans in Progress', value: 40 },
@@ -116,7 +124,7 @@ function Reports() {
                         <Card title="Applicant Categories" className="pie-chart-card">
                             <PieChart width={chartWidth} height={chartWidth}>
                                 <Pie
-                                    data={pieDocData}
+                                    data={pieApplicantData}
                                     cx={chartWidth/2}
                                     cy={chartWidth/2}
                                     labelLine={false}
@@ -125,7 +133,7 @@ function Reports() {
                                     fill="#8884d8"
                                     dataKey="value"
                                 >
-                                    {pieDocData.map((entry, index) => (
+                                    {pieApplicantData.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>
