@@ -197,7 +197,7 @@ body {
   font-size: 25px;
 }
 
-.charts {
+.dashboard-charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;

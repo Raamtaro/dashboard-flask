@@ -25,30 +25,30 @@ function Sidebar({openSidebarToggle, OpenSidebar, switchTab}) {
                             <BsFillArchiveFill className='icon'/> Documents
                         
                     </li>
-                    <li className='sidebar-list-item'>
-                        <a href="">
+                    {/* <li className='sidebar-list-item'>
+                        
                             <BsFillGrid3X3GapFill className='icon'/> Categories
-                        </a>
-                    </li>
-                    <li className='sidebar-list-item'>
-                        <a href="">
+                        
+                    </li> */}
+                    {/* <li className='sidebar-list-item'>
+                        
                             <BsPeopleFill className='icon'/> Applicants
-                        </a>
-                    </li>
-                    <li className='sidebar-list-item'>
-                        <a href="">
+                        
+                    </li> */}
+                    {/* <li className='sidebar-list-item'>
+                        
                             <BsListCheck className='icon'/> Checklist
-                        </a>
-                    </li>
-                    <li className='sidebar-list-item'>
-                        <a href="">
+                        
+                    </li> */}
+                    <li className='sidebar-list-item' onClick={() => switchTab('reports')}>
+                        
                             <BsMenuButtonWideFill className='icon'/> Reports
-                        </a>
+                        
                     </li>
                     <li className='sidebar-list-item'>
-                        <a href="">
+                        
                             <BsFillGearFill className='icon'/> Settings
-                        </a>
+                        
                     </li>
                 </ul>
             </aside>

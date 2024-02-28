@@ -110,7 +110,7 @@ function Home() {
             </div>
         </div>
 
-        <div className='charts'>
+        <div className='dashboard-charts'>
             <ResponsiveContainer width="100%" height="100%">
             <BarChart
             width={500}

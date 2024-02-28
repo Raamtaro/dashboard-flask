@@ -1,0 +1,37 @@
+.report-progress-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between cards */
+  }
+  
+  /* Adjust the layout on smaller screens */
+  @media (max-width: 768px) {
+    .report-progress-bars {
+      flex-direction: column; /* Stack the cards vertically on small screens */
+    }
+  }
+  
+  .report-progress-card {
+    /* Custom styles if needed */
+  }
+
+  .charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+     /* Adjust based on your layout */
+  }
+
+  .charts .pie-chart-card {
+    margin-bottom: 16px; /* Or any desired spacing */
+  }
+  
+  /* Last child shouldn't have a margin-bottom */
+  .charts .pie-chart-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .scrollable-column {
+    max-height: calc(100vh - 60px - 20px); /* Adjust based on your actual header and padding */
+    overflow-y: auto; /* Enables vertical scrolling */
+  }
