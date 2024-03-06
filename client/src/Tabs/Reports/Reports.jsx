@@ -6,6 +6,7 @@ import './Reports.css';
 
 function Reports() {
     const [chartWidth, setChartWidth] = useState(400);
+    const [data, setData] = useState({})
 
     const timeSavedData = [
         { name: 'Monday', WithoutDashboard: 8, WithDashboard: 5 },
